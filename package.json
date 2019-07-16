@@ -1,5 +1,5 @@
 {
-  "name": "js_server",
+  "name": "heroku-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
