@@ -20,5 +20,7 @@ we need to handle the boolean statement
 by default it will use 5000 and if env variable in
 production will run on the configured port
 */
-const PORT  = process.env.PORT || 5000;
-app.listen(5000);
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+console.log("Listening on Port 3000");
+});
