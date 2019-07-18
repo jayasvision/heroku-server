@@ -23,6 +23,8 @@ app.use(
   })
 );
 
+//middleware - > inside app - are small function
+//to modify the request that needs to be sent to the handler
 
 app.use(passport.initialize());
 app.use(passport.session());
