@@ -1,11 +1,35 @@
 const express = require('express'); //sharing files between different files
                                   // import express from 'express'; ES2015 modules
-const app = express(); // represents a running express app
 
-//route handler
-app.get('/', (req, res) => {
-  res.send({hi: 'there'});
-});
+
+require('./model/User');
+require('./services/passport');
+
+
+const app = express(); // represents a running express app
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const keys = require('./config/keys')
+
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+
+// 30 days cookie will last milliseconds
+//ecnrypted so no one can use it
+app.use(
+  cookieSession({
+    maxAge: 30*24*60*60* 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passing app to authRoutes.js
+require('./routes/authRoutes')(app);
+
 
 app.get('/greet', (req, res) => {
   res.send({hi: 'there'});
